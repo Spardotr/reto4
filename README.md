@@ -151,7 +151,7 @@ Class Exercise
             self.inner_angles_.extend([angle_A, angle_B, angle_C])
             return self.inner_angles_
     
-    # Ejemplos de uso
+    #Ejemplos de utilidad
     bottom_left_rect = Point(0, 0)
     upper_right_rect = Point(4, 3)
     
@@ -218,7 +218,7 @@ Class Exercise
         def calculate_perimeter(self):
             return 4 * self.side_length
     
-    # Crear instancias y mostrar resultados
+    # Toca probar el codigo, aca estan los comandos con los que lo hice (Perdon no s eutilizar GitHub)
     rect = Rectangle(5, 10)
     square = Square(7)
     
@@ -229,9 +229,6 @@ Class Exercise
     print(f"El Cuadrado tiene lados de {square.side_length}")
     print(f"Su Área es de {square.calculate_area()}")
     print(f"Su Perímetro es de {square.calculate_perimeter()}")
-
-    
-Aqui se prueba el codigo
 
     print(f"El triángulo inicial tiene un perímetro de {triangle.perimeter():.2f}")
     
@@ -394,15 +391,17 @@ Ejercicio del Restaurante con getters y setters
                 print(f"Payment made in cash. Change: {self.amount_given_ - amount:.2f}")
             else:
                 print(f"Insufficient funds. Missing {amount - self.amount_given_:.2f} to complete the payment.")
-    
-    drink = Beverage("water", 2.75, "still", "250 ml")
-    appetizer = Appetizer("Mini empanadas", 13.50, "beef", "Group")
-    main_course = MainCourse("Dish of the day", 24.00, "daily", "beef", "salad", "rice")
+
+
+    #Aca lo mismo, instanciamos para probar
+    Bebida = Beverage("water", 2.75, "still", "250 ml")
+    Entradita = Appetizer("Chicharrones carnudos", 13.50, "beef", "Group")
+    Elplatote = MainCourse("Dish of the day", 24.00, "daily", "beef", "salad", "rice")
     
     order = Order()
-    order.add_item(drink, 2)
-    order.add_item(appetizer, 1)
-    order.add_item(main_course, 1)
+    order.add_item(Bebida, 2)
+    order.add_item(Entradita, 1)
+    order.add_item(Elplatote, 1)
     
     print("La orden antes del descuento:")
     order.display_order()
