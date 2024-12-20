@@ -1,4 +1,5 @@
-Reto 4
+Class Exercise
+1.0
 
     import math
     
@@ -181,7 +182,57 @@ Reto 4
     equilateral = Equilateral(p1, Point(4, 0), Point(2, math.sqrt(12)))
     scalene = Scalene(p1, p4, p5)
     trirectangle = TriRectangle(p1, p2, Point(4, 3))
+
+2.0
+
+    class Shape:
+        def __init__(self):
+            pass
     
+        def calculate_area(self):
+            pass
+    
+        def calculate_perimeter(self):
+            pass
+    
+    class Rectangle(Shape):
+        def __init__(self, width_val, height_val):
+            super().__init__()
+            self.width_val = width_val
+            self.height_val = height_val
+    
+        def calculate_area(self):
+            return self.height_val * self.width_val
+    
+        def calculate_perimeter(self):
+            return 2 * self.height_val + 2 * self.width_val
+    
+    class Square(Shape):
+        def __init__(self, side_length):
+            super().__init__()
+            self.side_length = side_length
+    
+        def calculate_area(self):
+            return self.side_length ** 2
+    
+        def calculate_perimeter(self):
+            return 4 * self.side_length
+    
+    # Crear instancias y mostrar resultados
+    rect = Rectangle(5, 10)
+    square = Square(7)
+    
+    print(f"El Rectángulo tiene un ancho de {rect.width_val} y altura de {rect.height_val}")
+    print(f"Su Área es de {rect.calculate_area()}")
+    print(f"Su Perímetro es de {rect.calculate_perimeter()}")
+    
+    print(f"El Cuadrado tiene lados de {square.side_length}")
+    print(f"Su Área es de {square.calculate_area()}")
+    print(f"Su Perímetro es de {square.calculate_perimeter()}")
+
+    
+Aqui se prueba el codigo
+
     print(f"El triángulo inicial tiene un perímetro de {triangle.perimeter():.2f}")
     
     print("\n")
@@ -203,3 +254,165 @@ Reto 4
     
     print(f"El triángulo rectángulo tiene un área de {trirectangle.area():.2f}, un perímetro de {trirectangle.perimeter():.2f}")
     print(f"Sus ángulos internos son {trirectangle.inner_angles()}")
+
+Ejercicio del Restaurante con getters y setters
+
+        class MenuItem:
+        def __init__(self, name: str, price: float, type_: str):
+            self._name = name
+            self._price = price
+            self._type = type_
+    
+        def get_name(self):
+            return self._name
+    
+        def set_name(self, name: str):
+            self._name = name
+    
+        def get_price(self):
+            return self._price
+    
+        def set_price(self, price: float):
+            self._price = price
+    
+        def get_type(self):
+            return self._type
+    
+        def set_type(self, type_: str):
+            self._type = type_
+    
+        def total_price(self, quantity) -> float:
+            return quantity * self._price
+    
+    class Appetizer(MenuItem):
+        def __init__(self, name: str, price: float, type_: str, serving: str):
+            super().__init__(name, price, type_)
+            self._serving = serving
+    
+        def get_serving(self):
+            return self._serving
+    
+        def set_serving(self, serving: str):
+            self._serving = serving
+    
+    class Beverage(MenuItem):
+        def __init__(self, name: str, price: float, type_: str, size: str):
+            super().__init__(name, price, type_)
+            self._size = size
+    
+        def get_size(self):
+            return self._size
+    
+        def set_size(self, size: str):
+            self._size = size
+    
+    class Dessert(MenuItem):
+        def __init__(self, name: str, price: float, type_: str, flavor: str):
+            super().__init__(name, price, type_)
+            self._flavor = flavor
+    
+        def get_flavor(self):
+            return self._flavor
+    
+        def set_flavor(self, flavor: str):
+            self._flavor = flavor
+    
+    class MainCourse(MenuItem):
+        def __init__(self, name: str, price: float, type_: str, protein: str, vegetable: str, starch: str):
+            super().__init__(name, price, type_)
+            self._protein = protein
+            self._vegetable = vegetable
+            self._starch = starch
+    
+        def get_protein(self):
+            return self._protein
+    
+        def set_protein(self, protein: str):
+            self._protein = protein
+    
+        def get_vegetable(self):
+            return self._vegetable
+    
+        def set_vegetable(self, vegetable: str):
+            self._vegetable = vegetable
+    
+        def get_starch(self):
+            return self._starch
+    
+        def set_starch(self, starch: str):
+            self._starch = starch
+    
+    class Order:
+        def __init__(self):
+            self.items_ = []
+    
+        def add_item(self, item: MenuItem, quantity: int = 1):
+            self.items_.append((item, quantity))
+    
+        def calculate_total(self) -> float:
+            total = sum(item.total_price(quantity) for item, quantity in self.items_)
+            return total
+    
+        def apply_discount(self, discount: float) -> float:
+            total = self.calculate_total()
+            return total * (1 - discount)
+    
+        def display_order(self):
+            for item, quantity in self.items_:
+                print(f'{quantity} x {item.get_name()} - {item.total_price(quantity):.2f} (unidad: {item.get_price():.2f})')
+    
+            total = self.calculate_total()
+            print(f'Total: {total:.2f}')
+    
+        def pay(self, payment_method: "PaymentMethod"):
+            total = self.calculate_total()
+            payment_method.pay(total)
+    
+    class PaymentMethod:
+        def __init__(self):
+            pass
+    
+        def pay(self, amount):
+            pass
+    
+    class Card(PaymentMethod):
+        def __init__(self, number, cvv):
+            super().__init__()
+            self.number_ = number
+            self.cvv_ = cvv
+    
+        def pay(self, amount):
+            print(f"Paying {amount:.2f} with card ending in {self.number_[-4:]}")
+    
+    class Cash(PaymentMethod):
+        def __init__(self, amount_given):
+            super().__init__()
+            self.amount_given_ = amount_given
+    
+        def pay(self, amount):
+            if self.amount_given_ >= amount:
+                print(f"Payment made in cash. Change: {self.amount_given_ - amount:.2f}")
+            else:
+                print(f"Insufficient funds. Missing {amount - self.amount_given_:.2f} to complete the payment.")
+    
+    drink = Beverage("water", 2.75, "still", "250 ml")
+    appetizer = Appetizer("Mini empanadas", 13.50, "beef", "Group")
+    main_course = MainCourse("Dish of the day", 24.00, "daily", "beef", "salad", "rice")
+    
+    order = Order()
+    order.add_item(drink, 2)
+    order.add_item(appetizer, 1)
+    order.add_item(main_course, 1)
+    
+    print("La orden antes del descuento:")
+    order.display_order()
+    
+    discount_rate = 0.10
+    total_after_discount = order.apply_discount(discount_rate)
+    print(f"\nTotal con {discount_rate * 100}% de descuento: {total_after_discount:.2f}")
+    
+    print("\nPagando:")
+    Tarjeta = Card("12345678901234568347643863", "123")
+    Cash = Cash(50.00)
+    order.pay(Tarjeta)  
+    order.pay(Cash)
